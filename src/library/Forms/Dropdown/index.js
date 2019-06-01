@@ -172,7 +172,7 @@ class Dropdown extends Component<Props, State> {
                             ? searchValue.charAt(0).toUpperCase() + searchValue.slice(1)
                             : searchValue.toLowerCase()
                         }</strong>`,
-                      );                      
+                      );
 
                     const finalValue = richOption.charAt(0).toUpperCase() + richOption.slice(1);
                     return (

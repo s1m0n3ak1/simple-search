@@ -41,4 +41,4 @@ Search into an array with filtering and realtime highlighting of the words you a
 
 Enjoy!
 
-Execution timespan: 4 hours.
+Execution timespan: 4:45 hours.
