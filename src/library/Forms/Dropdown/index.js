@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import dompurify from 'dompurify';
 
 import './style.scss';
 
@@ -161,26 +162,35 @@ class Dropdown extends Component<Props, State> {
                       )
                   ))
                   .map((option, index) => {
+                    const sanitizer = dompurify.sanitize;
                     const richOption = option
                       .toLowerCase()
-                      .replace(searchValue.toLowerCase(), `<strong>${searchValue.toLowerCase()}</strong>`);
+                      .replace(
+                        searchValue.toLowerCase(),
+                        `<strong>${
+                          option.toLowerCase().startsWith(searchValue.toLowerCase())
+                            ? searchValue.charAt(0).toUpperCase() + searchValue.slice(1)
+                            : searchValue.toLowerCase()
+                        }</strong>`,
+                      );                      
 
                     const finalValue = richOption.charAt(0).toUpperCase() + richOption.slice(1);
                     return (
-                      <button
-                        key={option}
-                        id={`${name}-${index}`}
-                        type="button"
-                        name={name}
-                        className={
-                          dropdownButton === `${name}-dropdown-${index}`
-                            ? 'selected-button'
-                            : ''
-                        }
-                        onClick={e => this.selectDropdown(e)}
-                        value={option}
-                        dangerouslySetInnerHTML={{ __html: finalValue }} // eslint-disable-line
-                      />
+                      <li key={option}>
+                        <button
+                          id={`${name}-${index}`}
+                          type="button"
+                          name={name}
+                          className={
+                            dropdownButton === `${name}-dropdown-${index}`
+                              ? 'selected-button'
+                              : ''
+                          }
+                          onClick={e => this.selectDropdown(e)}
+                          value={option}
+                          dangerouslySetInnerHTML={{ __html: sanitizer(finalValue) }} // eslint-disable-line
+                        />
+                      </li>
                     );
                   })
                 }

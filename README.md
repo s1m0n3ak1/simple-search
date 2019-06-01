@@ -31,6 +31,10 @@ and then:
 
 so visit http://localhost:8080 or http://0.0.0.0:8080.
 
+### Pitfalls and Weaknesses
+
+In order to render the options and inject the html string modified to highlight the subset of a string that is searched. This is made trough 'dangerouslySetInnerHTML' with the use of frontend shield to purify the dangerous imputs called 'dompurify'.
+
 ### Features
 
 Search into an array with filtering and realtime highlighting of the words you are searching for. Scroll down on the list with keyboard cursors that will autoscroll once you reach the bottom of the visible options.
